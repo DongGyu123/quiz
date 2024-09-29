@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from './component/main';
-import Quiz from './component/quiz';
-import End from './component/end';
+import Main from './pages/main';
+import Quiz from './pages/quiz';
+import End from './pages/end';
 function App() {
   return (
     <div className="App">
