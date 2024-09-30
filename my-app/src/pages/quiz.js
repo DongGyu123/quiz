@@ -29,7 +29,6 @@ const maincat=cats[randomInt]
 
 const filteredCatList = cat_list.filter(cat => cat.includes(maincat) && !cat.includes('fake'));
 const fakedCatList = cat_list.filter(cat => cat.includes(maincat) && cat.includes('fake'));
-
 const firstcat = filteredCatList[Math.floor(Math.random() * filteredCatList.length)];
 
 const Opening = ({ onStart }) => {
@@ -87,8 +86,8 @@ const Game = ({ gameNumber }) => {
             const randomFilteredCat = remainingFilteredCats.length > 0
                 ? remainingFilteredCats[Math.floor(Math.random() * remainingFilteredCats.length)]
                 : null;
-                const remainingFakeCats = fakedCatList.filter(cat => !usedCat.includes(cat));
-                const randomFakeCat = remainingFakeCats.length > 0
+            const remainingFakeCats = fakedCatList.filter(cat => !usedCat.includes(cat));
+            const randomFakeCat = remainingFakeCats.length > 0
                     ? remainingFakeCats[Math.floor(Math.random() * remainingFakeCats.length)]
                     : null;
 
@@ -99,7 +98,11 @@ const Game = ({ gameNumber }) => {
             if (randomFakeCat) {
                 newGameList.push(randomFakeCat);
             }
-            const remainingCats = cat_list.filter(cat => !usedCat.includes(cat));
+            const remainingCats = cat_list.filter(cat => 
+                !usedCat.includes(cat) && 
+                !remainingFilteredCats.includes(cat) && 
+                !remainingFakeCats.includes(cat)
+            );
             const randomCats = shuffleArray(remainingCats).slice(0, 2);
             newGameList = [...newGameList, ...randomCats];
             newGameList = shuffleArray(newGameList);
@@ -110,6 +113,7 @@ const Game = ({ gameNumber }) => {
             }
         }
         setCanChoose(true);
+        console.log(gameCount, gameList);
     }, [gameCount]);
 
     const Answer = (firstcat, name) =>{
